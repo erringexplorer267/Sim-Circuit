@@ -60,7 +60,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
       />
       
       {/* Glossy Overlay */}
-      <div className="absolute inset-px rounded-[23px] bg-slate-950/90 z-[1]" />
+      <div className="absolute inset-px rounded-[23px] bg-slate-900/60 z-[1]" />
 
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex justify-between items-start mb-6">

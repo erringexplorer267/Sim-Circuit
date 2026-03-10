@@ -91,7 +91,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
             <Activity size={14} className="animate-pulse" />
             <span>Project Sim-Circuit Beta</span>
           </motion.div>
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-white">
+          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-white">
             <span className="block italic">Design Hardware.</span>
             <span className="bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent">Execute Logic.</span>
           </h1>
@@ -110,7 +110,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
             icon={Cpu}
             isFunctional
             color="#00f3ff"
-            className="md:col-span-6 lg:col-span-6 h-[400px]"
+            className="md:col-span-6 lg:col-span-6 min-h-[400px]"
           >
             <div className="flex flex-col h-full justify-end">
               <div className="mb-6 p-4 rounded-xl bg-slate-900/50 border border-white/5 space-y-2">
@@ -146,7 +146,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
             icon={Brain}
             tag="Coming Soon / Beta"
             color="#ff00ea"
-            className="md:col-span-6 lg:col-span-6 h-[400px]"
+            className="md:col-span-6 lg:col-span-6 min-h-[400px]"
           >
              <div className="h-full mt-4 rounded-xl border border-white/5 bg-slate-900/30 overflow-hidden relative group-hover:border-fuchsia-500/30 transition-all">
                 {/* Abstract Animation Placeholder */}
@@ -182,7 +182,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
             icon={Database}
             color="#00ff62"
             tag="Coming Soon"
-            className="md:col-span-6 lg:col-span-6 h-[280px]"
+            className="md:col-span-6 lg:col-span-6 min-h-[280px]"
           >
             <div className="flex gap-4 mt-4 overflow-hidden mask-fade-right">
               {['Mouser', 'DigiKey', 'LCSC', 'RS'].map((name, i) => (
@@ -201,7 +201,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
             icon={Users}
             color="#ffd900"
             tag="In Development"
-            className="md:col-span-6 lg:col-span-6 h-[280px]"
+            className="md:col-span-6 lg:col-span-6 min-h-[280px]"
           >
              <div className="relative h-24 mt-4 border border-white/5 rounded-xl bg-slate-900/40 overflow-hidden">
                 <motion.div 
@@ -229,7 +229,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
 
         {/* Footer */}
         <motion.div variants={itemVariants} className="text-center pt-20 border-t border-white/10 space-y-4">
-           <div className="text-4xl font-bold bg-white/20 bg-clip-text text-transparent italic tracking-tightest">SIM-CIRCUIT.EXE</div>
+           <div className="text-2xl md:text-4xl font-bold bg-white/20 bg-clip-text text-transparent italic tracking-tightest">SIM-CIRCUIT.EXE</div>
            <p className="text-slate-500 text-xs font-mono uppercase tracking-[0.5em]">
               The Hardware Operating System
            </p>

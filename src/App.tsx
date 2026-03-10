@@ -58,7 +58,7 @@ function App() {
   }
 
   return (
-    <div className="relative w-screen h-screen bg-black text-slate-200 overflow-hidden font-sans">
+    <div className="relative w-screen min-h-screen bg-black text-slate-200 overflow-y-auto font-sans">
       
       {/* User Header/Toolbar */}
       <div className="fixed top-4 right-4 z-[110] flex items-center gap-3">
@@ -87,7 +87,7 @@ function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 1.1, filter: 'blur(20px)' }}
             transition={{ duration: 0.8 }}
-            className="absolute inset-0 z-[100]"
+            className="w-full min-h-screen z-[100]"
           >
             <LandingPage onLaunch={() => setView('simulator')} />
           </motion.div>
@@ -97,7 +97,7 @@ function App() {
             initial={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col w-full h-full"
+            className="flex flex-col w-full h-screen overflow-hidden"
           >
             <SimulationWorkspace orchestrator={orchestrator} />
 
