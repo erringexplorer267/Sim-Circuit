@@ -95,7 +95,7 @@ function App() {
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
                     disabled={stage !== 'IDLE' && stage !== 'COMPLETE'}
-                    placeholder="E.g. 'Dual-Axis Solar Tracker'..."
+                    placeholder="Simulate your visuals..."
                     className="flex-1 bg-transparent border-none outline-none text-slate-200 placeholder-slate-500 text-xs sm:text-sm py-2 font-medium"
                   />
                   <button

@@ -99,9 +99,6 @@ export const SimulationWorkspace: React.FC<SimulationWorkspaceProps> = ({ orches
             edges={edges} 
             setNodes={setNodes} 
             setEdges={setEdges} 
-            isSimulating={isSimulating}
-            onStartSimulation={handleRunSimulation}
-            onStopSimulation={stopSimulation}
           />
           
           {/* Dashboard Description Popup */}

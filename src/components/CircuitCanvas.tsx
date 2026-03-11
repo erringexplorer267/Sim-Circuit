@@ -14,7 +14,7 @@ import {
     getBezierPath,
 } from '@xyflow/react';
 import { DynamicNode } from './DynamicNode';
-import { Download, Camera, Play, Square } from 'lucide-react';
+import { Download, Camera } from 'lucide-react';
 import { toPng } from 'html-to-image';
 
 interface CircuitCanvasProps {
@@ -22,9 +22,6 @@ interface CircuitCanvasProps {
     edges: Edge[];
     setNodes: (nds: Node[] | ((nds: Node[]) => Node[])) => void;
     setEdges: (eds: Edge[] | ((eds: Edge[]) => Edge[])) => void;
-    isSimulating: boolean;
-    onStartSimulation: () => void;
-    onStopSimulation: () => void;
 }
 
 // Custom Edge Component for Animated Connections
@@ -147,10 +144,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
     nodes, 
     edges, 
     setNodes, 
-    setEdges,
-    isSimulating,
-    onStartSimulation,
-    onStopSimulation
+    setEdges
 }) => {
     const nodeTypes = useMemo(() => ({ 
         customPin: DynamicNode,
