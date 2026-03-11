@@ -1,15 +1,29 @@
 import React from 'react';
-import { Cpu, Zap, Download, FileJson } from 'lucide-react';
+import { Cpu, Zap, Download, FileJson, Square } from 'lucide-react';
+import { UserProfile } from './UserProfile';
+import type { User } from 'firebase/auth';
 
 interface HeaderProps {
     stage: string;
     isSimulating: boolean;
     onRunSimulation: () => void;
+    onStopSimulation: () => void;
     onExportImage: () => void;
     onExportData: () => void;
+    user: User;
+    onLogout: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ stage, isSimulating, onRunSimulation, onExportImage, onExportData }) => {
+export const Header: React.FC<HeaderProps> = ({ 
+    stage, 
+    isSimulating, 
+    onRunSimulation, 
+    onStopSimulation,
+    onExportImage, 
+    onExportData,
+    user,
+    onLogout
+}) => {
     return (
         <header className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-3 md:px-6 py-3 md:py-4 bg-slate-950/50 backdrop-blur-md border-b border-slate-800">
             <div className="flex items-center gap-2">
@@ -28,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({ stage, isSimulating, onRunSimula
                 </div>
 
                 {stage === 'COMPLETE' && (
-                    <div className="flex items-center gap-1 md:gap-2 md:mr-4 md:border-r md:border-slate-700 md:pr-4">
+                    <div className="hidden md:flex items-center gap-1 md:gap-2 md:mr-4 md:border-r md:border-slate-700 md:pr-4">
                         <button
                             onClick={onExportImage}
                             title="Export Image"
@@ -47,14 +61,32 @@ export const Header: React.FC<HeaderProps> = ({ stage, isSimulating, onRunSimula
                 )}
 
                 <button
-                    onClick={onRunSimulation}
-                    disabled={stage !== 'COMPLETE' || isSimulating}
-                    className="flex items-center gap-1 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-md bg-[#00f3ff]/10 text-[#00f3ff] border border-[#00f3ff]/30 hover:bg-[#00f3ff]/20 hover:shadow-[0_0_15px_rgba(0,243,255,0.4)] transition-all text-[10px] md:text-sm font-bold uppercase tracking-wider disabled:opacity-50 disabled:grayscale disabled:hover:shadow-none font-mono"
+                    onClick={isSimulating ? onStopSimulation : onRunSimulation}
+                    disabled={stage !== 'COMPLETE'}
+                    className={`flex items-center gap-1 md:gap-2 px-2 md:px-4 py-1.5 md:py-2 rounded-md border transition-all text-[10px] md:text-sm font-bold uppercase tracking-wider disabled:opacity-50 disabled:grayscale disabled:hover:shadow-none font-mono relative right-1 md:right-0 ${
+                        isSimulating 
+                        ? 'bg-red-500/10 text-red-500 border-red-500/30 hover:bg-red-500/20 hover:shadow-[0_0_15px_rgba(239,68,68,0.4)]' 
+                        : 'bg-[#00f3ff]/10 text-[#00f3ff] border-[#00f3ff]/30 hover:bg-[#00f3ff]/20 hover:shadow-[0_0_15px_rgba(0,243,255,0.4)]'
+                    }`}
                 >
-                    <Zap size={14} className={isSimulating ? 'animate-pulse' : ''} />
-                    <span className="hidden xs:inline">{isSimulating ? 'Simulating...' : 'Run Simulation'}</span>
-                    <span className="xs:hidden">{isSimulating ? '...' : 'Run'}</span>
+                    {isSimulating ? (
+                        <>
+                            <Square size={14} fill="currentColor" className="animate-pulse" />
+                            <span className="hidden xs:inline">Stop Simulation</span>
+                            <span className="xs:hidden">Stop</span>
+                        </>
+                    ) : (
+                        <>
+                            <Zap size={14} />
+                            <span className="hidden xs:inline">Run Simulation</span>
+                            <span className="xs:hidden">Run</span>
+                        </>
+                    )}
                 </button>
+
+                <div className="md:ml-2">
+                    <UserProfile user={user} onLogout={onLogout} />
+                </div>
             </div>
         </header>
     );

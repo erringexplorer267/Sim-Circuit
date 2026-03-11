@@ -11,12 +11,16 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FeatureCard } from './FeatureCard';
+import { UserProfile } from './UserProfile';
+import type { User } from 'firebase/auth';
 
 interface LandingPageProps {
   onLaunch: () => void;
+  user: User;
+  onLogout: () => void;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch, user, onLogout }) => {
   const [isLaunching, setIsLaunching] = useState(false);
 
   const handleLaunch = () => {
@@ -48,6 +52,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
 
   return (
     <div className="relative min-h-screen w-full landing-radial-bg text-slate-200 overflow-x-hidden flex flex-col items-center justify-center py-20 px-6 font-sans">
+      
+      {/* Top Header for Landing */}
+      <div className="fixed top-6 right-6 z-[110]">
+        <UserProfile user={user} onLogout={onLogout} />
+      </div>
       
       {/* Background Grid Pattern */}
       <div className="fixed inset-0 pointer-events-none opacity-20">
@@ -101,7 +110,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch }) => {
         </motion.div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:col-span-12 gap-6 pb-20">
           
           {/* Card 1: Flagship */}
           <FeatureCard 

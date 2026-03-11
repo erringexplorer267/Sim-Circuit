@@ -191,7 +191,7 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
     };
 
     return (
-        <div id="circuit-canvas-container" className="w-full h-screen flow-bg relative">
+        <div id="circuit-canvas-container" className="w-full h-full flow-bg relative min-h-[400px]">
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -209,27 +209,17 @@ export const CircuitCanvas: React.FC<CircuitCanvasProps> = ({
                     style={{ opacity: 0.5 }}
                 />
                 
-                <Panel position="top-right" className="flex gap-2">
-                    <button 
-                        onClick={isSimulating ? onStopSimulation : onStartSimulation}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-full font-bold transition-all ${
-                            isSimulating 
-                            ? 'bg-red-500/20 text-red-500 border border-red-500/50 hover:bg-red-500/30' 
-                            : 'bg-emerald-500/20 text-emerald-500 border border-emerald-500/50 hover:bg-emerald-500/30'
-                        }`}
-                    >
-                        {isSimulating ? <><Square size={16} fill="currentColor"/> STOP</> : <><Play size={16} fill="currentColor"/> RUN SIMULATION</>}
-                    </button>
+                <Panel position="top-right" className="flex gap-2 mt-28 md:mt-24 z-[60] pointer-events-auto">
                     <button 
                         onClick={downloadSnapshot}
-                        className="p-2 bg-slate-800 border border-slate-700 rounded-full text-slate-300 hover:text-white hover:bg-slate-700 transition-all"
+                        className="p-2 bg-slate-800 border border-slate-700 rounded-full text-slate-300 hover:text-white hover:bg-slate-700 transition-all cursor-pointer pointer-events-auto relative z-[70]"
                         title="Snapshot"
                     >
                         <Camera size={20} />
                     </button>
                     <button 
                         onClick={exportProject}
-                        className="p-2 bg-slate-800 border border-slate-700 rounded-full text-slate-300 hover:text-white hover:bg-slate-700 transition-all"
+                        className="p-2 bg-slate-800 border border-slate-700 rounded-full text-slate-300 hover:text-white hover:bg-slate-700 transition-all cursor-pointer pointer-events-auto relative z-[70]"
                         title="Export JSON"
                     >
                         <Download size={20} />

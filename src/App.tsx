@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, LogOut, User as UserIcon } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { LandingPage } from './components/LandingPage';
 import { AuthPage } from './components/AuthPage';
 import { SimulationWorkspace } from './components/SimulationWorkspace';
@@ -60,25 +60,6 @@ function App() {
   return (
     <div className="relative w-screen min-h-screen bg-black text-slate-200 overflow-y-auto font-sans">
       
-      {/* User Header/Toolbar */}
-      <div className="fixed top-4 right-4 z-[110] flex items-center gap-2 md:gap-3">
-        <div className="px-2 md:px-3 py-1.5 rounded-full border border-white/5 bg-white/5 backdrop-blur-md flex items-center gap-2">
-          {user.photoURL ? (
-            <img src={user.photoURL} alt={user.displayName || "User"} className="w-5 h-5 rounded-full border border-cyan-500/50" />
-          ) : (
-            <UserIcon size={12} className="text-cyan-400" />
-          )}
-          <span className="hidden sm:inline text-[10px] font-mono text-slate-400 max-w-[100px] truncate">{user.displayName || user.email}</span>
-        </div>
-        <button 
-          onClick={handleLogout}
-          className="p-2 rounded-full border border-white/5 bg-white/5 hover:bg-red-500/20 hover:border-red-500/30 text-slate-400 hover:text-red-400 transition-all"
-          title="Sign Out"
-        >
-          <LogOut size={14} />
-        </button>
-      </div>
-
       <AnimatePresence mode="wait">
         {view === 'landing' ? (
           <motion.div
@@ -89,7 +70,7 @@ function App() {
             transition={{ duration: 0.8 }}
             className="w-full min-h-screen z-[100]"
           >
-            <LandingPage onLaunch={() => setView('simulator')} />
+            <LandingPage onLaunch={() => setView('simulator')} user={user} onLogout={handleLogout} />
           </motion.div>
         ) : (
           <motion.div
@@ -99,13 +80,15 @@ function App() {
             transition={{ duration: 0.8 }}
             className="flex flex-col w-full h-screen overflow-hidden"
           >
-            <SimulationWorkspace orchestrator={orchestrator} />
+            <SimulationWorkspace orchestrator={orchestrator} user={user} onLogout={handleLogout} />
 
-            {/* Top Prompt Input */}
-            <div className={`fixed top-[4.5rem] sm:top-4 left-1/2 -translate-x-1/2 z-[100] w-full max-w-sm sm:max-w-xl px-4 transition-all duration-700 ease-in-out ${isSimulating ? 'opacity-0 pointer-events-none -translate-y-10' : 'opacity-100 translate-y-0'}`}>
+            {/* Top/Bottom Prompt Input */}
+            <div className={`fixed bottom-8 sm:top-4 left-1/2 -translate-x-1/2 z-[100] w-full max-w-sm sm:max-w-xl px-4 transition-all duration-700 ease-in-out ${isSimulating ? 'opacity-0 pointer-events-none translate-y-20 sm:-translate-y-10' : 'opacity-100 translate-y-0'}`}>
               <form onSubmit={handleSubmit} className="relative w-full group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-magenta rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-                <div className="relative flex items-center bg-slate-900/95 backdrop-blur-2xl border border-white/10 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] p-1.5 pl-4 transition-all focus-within:border-neon-cyan/50 focus-within:shadow-[0_0_30px_rgba(0,243,255,0.15)]">
+                <div className="relative flex items-center bg-slate-900/95 backdrop-blur-2xl border border-white/10 sm:border-white/10 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] p-1.5 pl-4 transition-all focus-within:border-neon-cyan/50 focus-within:shadow-[0_0_30px_rgba(0,243,255,0.15)]
+                  max-sm:border-neon-cyan/40 max-sm:shadow-[0_0_20px_rgba(0,243,255,0.15)]
+                ">
                   <Sparkles size={16} className="text-neon-cyan mr-3 shrink-0 animate-pulse" />
                   <input
                     type="text"
@@ -118,7 +101,7 @@ function App() {
                   <button
                     type="submit"
                     disabled={(stage !== 'IDLE' && stage !== 'COMPLETE') || !prompt.trim()}
-                    className="px-4 sm:px-6 py-2.5 ml-2 bg-gradient-to-r from-neon-cyan to-neon-magenta text-white font-black text-[9px] sm:text-[10px] uppercase tracking-[0.2em] rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-20 disabled:grayscale shadow-lg shadow-neon-cyan/20"
+                    className="px-4 sm:px-6 py-2.5 ml-2 bg-gradient-to-r from-neon-cyan to-neon-magenta text-white font-black text-[9px] sm:text-[10px] uppercase tracking-[0.2em] rounded-lg hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-20 disabled:grayscale shadow-lg shadow-neon-cyan/40 max-sm:shadow-[0_0_15px_rgba(0,243,255,0.4)]"
                   >
                     Architect
                   </button>
