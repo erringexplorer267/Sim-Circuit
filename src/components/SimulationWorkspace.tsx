@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { motion } from 'framer-motion';
 import { Header } from './Header';
 import { CircuitCanvas } from './CircuitCanvas';
 import { SerialMonitor } from './SerialMonitor';
@@ -55,6 +54,7 @@ export const SimulationWorkspace: React.FC<SimulationWorkspaceProps> = ({ orches
     });
   }, []);
 
+
   const exportData = useCallback(() => {
     const payload = {
       nodes,
@@ -75,9 +75,7 @@ export const SimulationWorkspace: React.FC<SimulationWorkspaceProps> = ({ orches
   }, [nodes, edges, scoutData, firmwareCode]);
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+    <div 
       className="flex flex-col w-full min-h-screen md:h-screen bg-black relative"
     >
       <Header
@@ -141,6 +139,6 @@ export const SimulationWorkspace: React.FC<SimulationWorkspaceProps> = ({ orches
             </div>
         </aside>
       </div>
-    </motion.div>
+    </div>
   );
 };

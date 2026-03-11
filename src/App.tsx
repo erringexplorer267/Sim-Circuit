@@ -66,8 +66,8 @@ function App() {
             key="landing"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.1, filter: 'blur(20px)' }}
-            transition={{ duration: 0.8 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="w-full min-h-screen z-[100]"
           >
             <LandingPage onLaunch={() => setView('simulator')} user={user} onLogout={handleLogout} />
@@ -75,18 +75,18 @@ function App() {
         ) : (
           <motion.div
             key="simulator"
-            initial={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="flex flex-col w-full h-screen overflow-hidden"
           >
             <SimulationWorkspace orchestrator={orchestrator} user={user} onLogout={handleLogout} />
 
             {/* Top/Bottom Prompt Input */}
-            <div className={`fixed bottom-8 sm:top-4 left-1/2 -translate-x-1/2 z-[100] w-full max-w-sm sm:max-w-xl px-4 transition-all duration-700 ease-in-out ${isSimulating ? 'opacity-0 pointer-events-none translate-y-20 sm:-translate-y-10' : 'opacity-100 translate-y-0'}`}>
+            <div className={`fixed bottom-8 sm:top-4 left-1/2 -translate-x-1/2 z-[100] w-full max-w-sm sm:max-w-xl px-4 transition-all duration-500 ease-in-out ${isSimulating ? 'opacity-0 pointer-events-none translate-y-20 sm:-translate-y-10' : 'opacity-100 translate-y-0'}`}>
               <form onSubmit={handleSubmit} className="relative w-full group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-magenta rounded-xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-                <div className="relative flex items-center bg-slate-900/95 backdrop-blur-2xl border border-white/10 sm:border-white/10 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] p-1.5 pl-4 transition-all focus-within:border-neon-cyan/50 focus-within:shadow-[0_0_30px_rgba(0,243,255,0.15)]
+                <div className="relative flex items-center bg-slate-900/95 backdrop-blur-lg border border-white/10 sm:border-white/10 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] p-1.5 pl-4 transition-all focus-within:border-neon-cyan/50 focus-within:shadow-[0_0_30px_rgba(0,243,255,0.15)]
                   max-sm:border-neon-cyan/40 max-sm:shadow-[0_0_20px_rgba(0,243,255,0.15)]
                 ">
                   <Sparkles size={16} className="text-neon-cyan mr-3 shrink-0 animate-pulse" />

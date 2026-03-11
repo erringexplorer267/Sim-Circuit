@@ -17,7 +17,7 @@ export const SimulationStatusOverlay: React.FC<SimulationStatusOverlayProps> = (
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
           className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-[90%] md:w-auto"
         >
-          <div className="bg-slate-900/80 backdrop-blur-xl border border-emerald-500/30 rounded-2xl p-3 md:p-4 shadow-2xl shadow-emerald-500/10 min-w-0 md:min-w-[320px] max-w-[500px]">
+          <div className="bg-slate-900/90 backdrop-blur-md border border-emerald-500/30 rounded-2xl p-3 md:p-4 shadow-2xl shadow-emerald-500/10 min-w-0 md:min-w-[320px] max-w-[500px]">
             <div className="flex items-start gap-4">
               <div className="bg-emerald-500/20 p-2 rounded-xl border border-emerald-500/30">
                 <Activity className="w-5 h-5 text-emerald-400 animate-pulse" />

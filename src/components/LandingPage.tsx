@@ -22,7 +22,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch, user, onLogo
     setIsLaunching(true);
     setTimeout(() => {
       onLaunch();
-    }, 1000);
+    }, 500);
   };
 
   const containerVariants = {
@@ -68,13 +68,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch, user, onLogo
       <AnimatePresence>
         {isLaunching && (
           <motion.div 
-            initial={{ scale: 1, opacity: 0 }}
-            animate={{ scale: 10, opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-[#000000] flex items-center justify-center p-0 m-0"
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-[100] bg-black flex items-center justify-center p-0 m-0"
           >
-            <div className="w-[100vw] h-[100vh] bg-cyan-400/20 blur-[150px] rounded-full" />
+            <motion.div 
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 2, opacity: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="w-[100vw] h-[100vh] bg-cyan-400/10 blur-[40px] rounded-full" 
+            />
           </motion.div>
         )}
       </AnimatePresence>
