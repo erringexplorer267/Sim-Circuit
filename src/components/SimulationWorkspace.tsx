@@ -7,7 +7,6 @@ import { AgentLogs } from './AgentLogs';
 import { CodeEditor } from './CodeEditor';
 import { BOMTable } from './BOMTable';
 import type { UseOrchestratorReturn } from '../hooks/useOrchestrator';
-
 import { SimulationStatusOverlay } from './SimulationStatusOverlay';
 
 interface SimulationWorkspaceProps {
@@ -86,14 +85,9 @@ export const SimulationWorkspace: React.FC<SimulationWorkspaceProps> = ({ orches
         onExportData={exportData}
       />
 
-      <div className="flex-1 flex pt-16 relative overflow-hidden">
-        {/* Left Sidebar: Reasoning Logs */}
-        <aside className="w-80 h-full flex-shrink-0 z-20">
-          <AgentLogs logs={logs} />
-        </aside>
-
-        {/* Main Canvas Area */}
-        <main className="flex-1 relative bg-slate-950">
+      <div className="flex-1 flex flex-col md:flex-row pt-14 md:pt-16 relative overflow-y-auto md:overflow-hidden">
+        {/* Main Canvas Area - Ratio 2 */}
+        <main className="w-full h-[50dvh] md:h-full md:flex-1 relative bg-slate-950 order-1 md:order-2 shrink-0 md:shrink">
           <CircuitCanvas 
             nodes={nodes} 
             edges={edges} 
@@ -111,17 +105,22 @@ export const SimulationWorkspace: React.FC<SimulationWorkspaceProps> = ({ orches
           />
         </main>
 
-        {/* Right Sidebar: Code & BOM / Serial Monitor */}
-        <aside className="w-[450px] h-full flex-shrink-0 z-20 flex flex-col bg-slate-900 border-l border-white/5 overflow-hidden">
+        {/* Left Sidebar: Reasoning Logs - Ratio 1 */}
+        <aside className="w-full h-[25dvh] md:h-full md:w-80 flex-shrink-0 z-20 bg-black md:bg-transparent border-t md:border-t-0 md:border-r border-white/5 order-2 md:order-1">
+          <AgentLogs logs={logs} />
+        </aside>
+
+        {/* Right Sidebar: Code & BOM / Serial Monitor - Ratio 1 */}
+        <aside className="w-full h-[25dvh] md:h-full md:w-[450px] flex-shrink-0 z-20 bg-slate-900 border-t md:border-t-0 md:border-l border-white/5 overflow-hidden flex flex-col order-3 md:order-3">
             <div className="flex-1 p-4 overflow-hidden flex flex-col gap-4">
                {/* Top Code Editor */}
-               <div className="flex-[3] min-h-[40%]">
+               <div className="flex-1 min-h-0">
                   <CodeEditor code={firmwareCode} />
                </div>
                
                {/* Middle: Serial Monitor (Only when simulating) */}
                {isSimulating && (
-                 <div className="flex-[2] min-h-[30%]">
+                 <div className="h-24 md:h-auto md:flex-1 min-h-0">
                    <SerialMonitor
                      isSimulating={isSimulating}
                      logs={serialLogs}
@@ -132,7 +131,7 @@ export const SimulationWorkspace: React.FC<SimulationWorkspaceProps> = ({ orches
 
                {/* Bottom Section: BOM / Status */}
                {!isSimulating && (
-                 <div className="flex-1 bg-slate-950/30 rounded-lg border border-white/5 overflow-hidden">
+                 <div className="h-24 md:h-auto md:flex-1 bg-slate-950/30 rounded-lg border border-white/5 overflow-hidden">
                     <BOMTable data={scoutData} />
                  </div>
                )}
