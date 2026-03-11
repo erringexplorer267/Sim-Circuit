@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import { 
   Cpu, 
-  Search, 
-  Users, 
   ChevronRight, 
-  Activity, 
-  Brain, 
-  Database,
-  ArrowRight
+  Activity
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FeatureCard } from './FeatureCard';
@@ -110,7 +105,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch, user, onLogo
         </motion.div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:col-span-12 gap-6 pb-20">
+        <div className="flex justify-center pb-20">
           
           {/* Card 1: Flagship */}
           <FeatureCard 
@@ -119,7 +114,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch, user, onLogo
             icon={Cpu}
             isFunctional
             color="#00f3ff"
-            className="md:col-span-6 lg:col-span-6 min-h-[400px]"
+            className="w-full max-w-2xl min-h-[400px]"
           >
             <div className="flex flex-col h-full justify-end">
               <div className="mb-6 p-4 rounded-xl bg-slate-900/50 border border-white/5 space-y-2">
@@ -147,93 +142,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunch, user, onLogo
               </button>
             </div>
           </FeatureCard>
-
-          {/* Card 2: Neural PCB */}
-          <FeatureCard 
-            title="Bekar Idea"
-            description="Auto-route complex PCB traces with AI. Optimized for thermal dissipation and signal integrity."
-            icon={Brain}
-            tag="Coming Soon / Beta"
-            color="#ff00ea"
-            className="md:col-span-6 lg:col-span-6 min-h-[400px]"
-          >
-             <div className="h-full mt-4 rounded-xl border border-white/5 bg-slate-900/30 overflow-hidden relative group-hover:border-fuchsia-500/30 transition-all">
-                {/* Abstract Animation Placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center p-8 opacity-40">
-                   <svg width="200" height="200" viewBox="0 0 200 200" className="stroke-fuchsia-500">
-                      <motion.path 
-                        d="M 20 20 L 180 20 L 180 180 L 20 180 Z" 
-                        fill="none" 
-                        strokeWidth="1" 
-                        strokeDasharray="10 5"
-                        animate={{ strokeDashoffset: [0, 100] }}
-                        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                      />
-                      <motion.circle 
-                        cx="100" cy="100" r="40" 
-                        fill="none" 
-                        strokeWidth="2"
-                        animate={{ r: [40, 50, 40], opacity: [0.3, 0.6, 0.3] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      />
-                   </svg>
-                </div>
-                <div className="absolute bottom-4 left-4 font-mono text-[10px] text-fuchsia-500 opacity-60">
-                   {">"} LOADING_PCB_MODEL::SIG_V0.4
-                </div>
-             </div>
-          </FeatureCard>
-
-          {/* Card 3: Datasheet Scout */}
-          <FeatureCard 
-            title="Automated Datasheet Scout"
-            description="Real-time component sourcing from Mouser, DigiKey, and LCSC. Live pricing and availability feeds."
-            icon={Database}
-            color="#00ff62"
-            tag="Coming Soon"
-            className="md:col-span-6 lg:col-span-6 min-h-[280px]"
-          >
-            <div className="flex gap-4 mt-4 overflow-hidden mask-fade-right">
-              {['Mouser', 'DigiKey', 'LCSC', 'RS'].map((name, i) => (
-                <div key={i} className="px-5 py-3 rounded-xl border border-white/5 bg-slate-900/50 flex items-center gap-2 whitespace-nowrap animate-pulse" style={{ animationDelay: `${i * 200}ms` }}>
-                  <Search size={14} className="text-green-400" />
-                  <span className="text-xs font-bold text-slate-300">{name}</span>
-                </div>
-              ))}
-            </div>
-          </FeatureCard>
-
-          {/* Card 4: Team Sync */}
-          <FeatureCard 
-            title="Team Collaborative Lab"
-            description="Multiplayer engineering environment with real-time cursor sync and version control for circuits."
-            icon={Users}
-            color="#ffd900"
-            tag="In Development"
-            className="md:col-span-6 lg:col-span-6 min-h-[280px]"
-          >
-             <div className="relative h-24 mt-4 border border-white/5 rounded-xl bg-slate-900/40 overflow-hidden">
-                <motion.div 
-                  initial={{ x: 20, y: 20 }}
-                  animate={{ x: [20, 100, 50, 20], y: [20, 40, 60, 20] }}
-                  transition={{ duration: 8, repeat: Infinity }}
-                  className="absolute p-1 bg-yellow-500 rounded-full flex items-center gap-1 shadow-[0_0_10px_#ffd900]"
-                >
-                  <ArrowRight size={8} className="rotate-[-45deg] text-slate-950" />
-                  <span className="text-[8px] font-bold text-slate-950 pr-1">Lead_Eng</span>
-                </motion.div>
-                <motion.div 
-                  initial={{ x: 150, y: 60 }}
-                  animate={{ x: [150, 80, 120, 150], y: [60, 20, 50, 60] }}
-                  transition={{ duration: 10, repeat: Infinity }}
-                  className="absolute p-1 bg-cyan-400 rounded-full flex items-center gap-1 shadow-[0_0_10px_#00f3ff]"
-                >
-                  <ArrowRight size={8} className="rotate-[-135deg] text-slate-950" />
-                  <span className="text-[8px] font-bold text-slate-950 pr-1">AI_Arch</span>
-                </motion.div>
-             </div>
-          </FeatureCard>
-
         </div>
 
         {/* Footer */}
